@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 766dea2a10519d640919339eacadf3a1, type: 3}
   m_Name: GunItem
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6847512015677725002, guid: 47d7b3ac2a7283b4aa3d5f2722d796f6, type: 3}
+  id: 1
+  uiDisplay: {fileID: 21300000, guid: ec566a71cae2b504ba2f2098aa53c0f3, type: 3}
   description: Test Item

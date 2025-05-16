@@ -1,56 +1,154 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.EventSystems;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class DisplayInventory : MonoBehaviour
 {
 
+    public MouseItem mouseItem = new MouseItem(); 
     public InventoryObject inventory;
     public int X_SPACE_BETWEEN_ITEMS;
     public int Y_SPACE_BETWEEN_ITEMS;
-    public int Y_START; 
-    public int NUMBER_OF_ROWS; 
+    public int Y_START;
+    public int X_SPACE_BETWEEN_SLOTS;
+    public int Y_SPACE_BETWEEN_SLOTS;
+    public int Y_START_SLOTS;
 
-    Dictionary<InventorySlot, GameObject> itemsDisplayed = new Dictionary<InventorySlot, GameObject>();
+    public int NUMBER_OF_ROWS;
+    public GameObject InventoryPrefab;
+
+    Dictionary<GameObject, InventorySlot> itemsDisplayed = new Dictionary<GameObject, InventorySlot>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        createDisplay(); 
+        createSlots();
     }
 
     // Update is called once per frame
     void Update()
     {
-        updateDisplay(); 
+        updateSlots();
     }
 
-    public void updateDisplay()
+    public void updateSlots()
     {
-        for (int i = 0; i < inventory.Container.Count; i++)
+        foreach (KeyValuePair<GameObject, InventorySlot> _slot in itemsDisplayed)
         {
-            if (!itemsDisplayed.ContainsKey(inventory.Container[i]))
-            { 
-                var obj = Instantiate(inventory.Container[i].item.prefab, Vector3.zero, Quaternion.identity, transform);
-                obj.GetComponent<RectTransform>().localPosition = getPosition(i);
-                itemsDisplayed.Add(inventory.Container[i], obj); 
+            if (_slot.Value.ID >= 0)
+            {
+                _slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().sprite = inventory.database.GetItem[_slot.Value.item.id].uiDisplay;
+                _slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 1);
             }
-
+            else
+            {
+                _slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().sprite = null;
+                _slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 0);
+            }
         }
     }
 
-    public void createDisplay()
+    public void createSlots()
     {
-        for (int i = 0; i < inventory.Container.Count; i++)
+        itemsDisplayed = new Dictionary<GameObject, InventorySlot>();
+        for (int i = 0; i < inventory.Container.Items.Length; i++)
         {
-            var obj = Instantiate(inventory.Container[i].item.prefab, Vector3.zero, Quaternion.identity, transform);
-            obj.GetComponent<RectTransform>().localPosition = getPosition(i);
-            itemsDisplayed.Add(inventory.Container[i], obj); 
+            var obj = Instantiate(InventoryPrefab, Vector3.zero, Quaternion.identity, transform);
+            obj.GetComponent<RectTransform>().localPosition = getPositionSlots(i);
+
+            AddEvent(obj, EventTriggerType.PointerEnter, delegate { OnEnter(obj); });
+            AddEvent(obj, EventTriggerType.PointerExit, delegate { OnExit(obj); });
+            AddEvent(obj, EventTriggerType.BeginDrag, delegate { OnStartDrag(obj); });
+            AddEvent(obj, EventTriggerType.EndDrag, delegate { OnExitDrag(obj); });
+            AddEvent(obj, EventTriggerType.Drag, delegate { OnDrag(obj); });
+
+            itemsDisplayed.Add(obj, inventory.Container.Items[i]);
         }
     }
 
-    public Vector3 getPosition(int i)
+    private void AddEvent(GameObject obj, EventTriggerType type, UnityAction<BaseEventData> action)
     {
-        return new Vector3(X_SPACE_BETWEEN_ITEMS, Y_START + (-Y_SPACE_BETWEEN_ITEMS * (i % NUMBER_OF_ROWS)), 0f); 
+        EventTrigger trigger = obj.GetComponent<EventTrigger>();
+        var eventTrigger = new EventTrigger.Entry();
+        eventTrigger.eventID = type;
+        eventTrigger.callback.AddListener(action);
+        trigger.triggers.Add(eventTrigger);
     }
+
+    public void OnEnter(GameObject obj)
+    {
+        mouseItem.hoverObject = obj;
+        if (itemsDisplayed.ContainsKey(obj))
+        { 
+            mouseItem.hoverItem = itemsDisplayed[obj];
+        }
+    }
+
+    public void OnExit(GameObject obj)
+    {
+        mouseItem.hoverObject = null;
+        mouseItem.hoverItem = null; 
+    }
+
+    public void OnStartDrag(GameObject obj)
+    {
+        Debug.Log(obj.name);
+        var mouseObject = new GameObject();
+        var rt = mouseObject.AddComponent<RectTransform>();
+        rt.sizeDelta = new Vector2(35, 35);
+        mouseObject.transform.SetParent(transform.parent);
+        if (itemsDisplayed[obj].ID >= 0)
+        {
+            var img = mouseObject.AddComponent<Image>();
+            img.sprite = inventory.database.GetItem[itemsDisplayed[obj].ID].uiDisplay;
+            img.raycastTarget = false;
+        }
+        mouseItem.obj = mouseObject; 
+        mouseItem.item = itemsDisplayed[obj];
+    }
+
+    public void OnExitDrag(GameObject obj)
+    {
+        if (mouseItem.hoverObject)
+        {
+            inventory.moveItem(itemsDisplayed[obj], itemsDisplayed[mouseItem.hoverObject]);
+        }
+        else
+        {
+
+        }
+        Destroy(mouseItem.obj);
+        mouseItem.item = null; 
+
+    }
+
+    public void OnDrag(GameObject obj)
+    {
+        if (mouseItem.obj != null)
+        {
+            mouseItem.obj.GetComponent<RectTransform>().position = Input.mousePosition; 
+        }
+
+    }
+
+    public Vector3 getPositionItems(int i)
+    {
+        return new Vector3(X_SPACE_BETWEEN_ITEMS, Y_START + (-Y_SPACE_BETWEEN_ITEMS * (i % NUMBER_OF_ROWS)), 0f);
+    }
+
+    public Vector3 getPositionSlots(int i)
+    {
+        return new Vector3(X_SPACE_BETWEEN_SLOTS, Y_START_SLOTS + (-Y_SPACE_BETWEEN_SLOTS * (i % NUMBER_OF_ROWS)), 0f);
+    }
+}
+
+public class MouseItem
+{
+    public GameObject obj;
+    public InventorySlot item;
+    public InventorySlot hoverItem; 
+    public GameObject hoverObject; 
 }

@@ -9,18 +9,40 @@ public class PlayerLook : MonoBehaviour
     [SerializeField] private float xSens = 10; 
     [SerializeField] private float ySens = 10; 
 
-    private float xRotation = 0f; 
-    
+    private float xRotation = 0f;
+    private bool locked = true; 
+
+    void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        locked = true;
+
+    }
+
+     public void ToggleLock()
+    {
+        if (locked)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            locked = false; 
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            locked = true;
+        }
+    }
+
     public void ProcessLook(Vector2 input)
-    { 
+    {
         float mouseX = input.x;
-        float mouseY = input.y; 
+        float mouseY = input.y;
 
-        xRotation -= mouseY * Time.deltaTime * ySens; 
-        xRotation = Mathf.Clamp(xRotation, -80, 80f);  
+        xRotation -= mouseY * Time.deltaTime * ySens;
+        xRotation = Mathf.Clamp(xRotation, -80, 80f);
 
-        cam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0); 
-        transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * xSens); 
+        cam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * xSens);
 
     }
 

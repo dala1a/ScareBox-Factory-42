@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 766dea2a10519d640919339eacadf3a1, type: 3}
   m_Name: KeyItem
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6847512015677725002, guid: ad15a56ef42735846b7c9e9b3dfa5077, type: 3}
+  id: 2
+  uiDisplay: {fileID: 21300000, guid: c9291a7fe113923468687d4b5119fe69, type: 3}
   description: Test Item

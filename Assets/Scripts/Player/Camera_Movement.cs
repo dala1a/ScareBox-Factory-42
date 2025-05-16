@@ -10,16 +10,9 @@ public class Camera_Movement : MonoBehaviour
     public float lookSensitivity = 1.0f;
     private float minXRotation = -55.0f; // Looking up limit
     private float maxXRotation = 55.0f;  // Looking down limit
-
     private float CurrRotx = 0f;
     private float CurrRoty = 0f;
-
-    void Start()
-    {
-
-        Cursor.lockState = CursorLockMode.Locked;
-
-    }
+   
     void OnLook(InputValue RotInput)
     {   
 

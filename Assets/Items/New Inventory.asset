@@ -12,4 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84460d47a9af58e48b648325801d25fc, type: 3}
   m_Name: New Inventory
   m_EditorClassIdentifier: 
-  Container: []
+  Container:
+    Items:
+    - item: {fileID: 0}
+      amount: 0
+      ID: -1
+    - item: {fileID: 0}
+      amount: 0
+      ID: -1
+    - item: {fileID: 0}
+      amount: 0
+      ID: -1
+    - item: {fileID: 0}
+      amount: 0
+      ID: -1
+    - item: {fileID: 0}
+      amount: 0
+      ID: -1
+    - item: {fileID: 0}
+      amount: 0
+      ID: -1
+    - item: {fileID: 0}
+      amount: 0
+      ID: -1
+  database: {fileID: 11400000, guid: 46be0518bc15dcf45a4098f9785b4b78, type: 2}
+  savePath: Inventory.Save

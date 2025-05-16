@@ -18,6 +18,7 @@ public class InputManager : MonoBehaviour
         onFoot = playerInput.OnFoot;
 
         onFoot.Jump.performed += ctx => playerMovement.jump(); 
+        onFoot.CursorLock.performed += ctx => playerLook.ToggleLock();
     }
 
     private void FixedUpdate()
