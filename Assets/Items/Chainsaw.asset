@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 766dea2a10519d640919339eacadf3a1, type: 3}
-  m_Name: KeyItem
+  m_Name: Chainsaw
   m_EditorClassIdentifier: 
-  id: 2
-  uiDisplay: {fileID: 21300000, guid: c9291a7fe113923468687d4b5119fe69, type: 3}
-  description: Test Item
+  id: 0
+  uiDisplay: {fileID: 21300000, guid: e181aff1217f4354da6543a3fe8a3b6e, type: 3}
+  itemObject: {fileID: 8289539585430382569, guid: 6171a42df2aeacd48949fb35c6a9da3d, type: 3}
+  description: Chainsaw for chainsawing lolol

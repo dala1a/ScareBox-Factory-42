@@ -10,8 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 766dea2a10519d640919339eacadf3a1, type: 3}
-  m_Name: ChainsawItem
+  m_Name: Key
   m_EditorClassIdentifier: 
-  id: 0
-  uiDisplay: {fileID: 21300000, guid: e181aff1217f4354da6543a3fe8a3b6e, type: 3}
-  description: Test Item
+  id: 2
+  uiDisplay: {fileID: 21300000, guid: c9291a7fe113923468687d4b5119fe69, type: 3}
+  itemObject: {fileID: 8860970023024853283, guid: ebc15cce86d00f34997637e3f22398a6, type: 3}
+  description: 'The key that opens no doors
+
+'

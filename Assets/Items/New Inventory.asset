@@ -17,23 +17,30 @@ MonoBehaviour:
     - item: {fileID: 0}
       amount: 0
       ID: -1
+      slotNumber: 0
     - item: {fileID: 0}
       amount: 0
       ID: -1
+      slotNumber: 0
     - item: {fileID: 0}
       amount: 0
       ID: -1
+      slotNumber: 0
     - item: {fileID: 0}
       amount: 0
       ID: -1
+      slotNumber: 0
     - item: {fileID: 0}
       amount: 0
       ID: -1
+      slotNumber: 0
     - item: {fileID: 0}
       amount: 0
       ID: -1
+      slotNumber: 0
     - item: {fileID: 0}
       amount: 0
       ID: -1
+      slotNumber: 0
   database: {fileID: 11400000, guid: 46be0518bc15dcf45a4098f9785b4b78, type: 2}
   savePath: Inventory.Save

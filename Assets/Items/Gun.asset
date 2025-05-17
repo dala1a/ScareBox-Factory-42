@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 766dea2a10519d640919339eacadf3a1, type: 3}
-  m_Name: GunItem
+  m_Name: Gun
   m_EditorClassIdentifier: 
   id: 1
   uiDisplay: {fileID: 21300000, guid: ec566a71cae2b504ba2f2098aa53c0f3, type: 3}
-  description: Test Item
+  itemObject: {fileID: 303054883774545911, guid: 5fcfc2c4ff9667a4e8a4dd620dd2fc2d, type: 3}
+  description: 'A gun that doesn''t shoot '

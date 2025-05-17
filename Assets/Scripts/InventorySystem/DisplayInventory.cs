@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class DisplayInventory : MonoBehaviour
 {
-
+    public InvMenuController invMenuController;
     public MouseItem mouseItem = new MouseItem(); 
     public InventoryObject inventory;
     public int X_SPACE_BETWEEN_ITEMS;
@@ -16,9 +16,9 @@ public class DisplayInventory : MonoBehaviour
     public int X_SPACE_BETWEEN_SLOTS;
     public int Y_SPACE_BETWEEN_SLOTS;
     public int Y_START_SLOTS;
-
     public int NUMBER_OF_ROWS;
     public GameObject InventoryPrefab;
+
 
     Dictionary<GameObject, InventorySlot> itemsDisplayed = new Dictionary<GameObject, InventorySlot>();
 
@@ -30,8 +30,18 @@ public class DisplayInventory : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+
         updateSlots();
+    }
+
+    public void dropItem()
+    {
+        Debug.Log("DRIOPIG");
+        if (mouseItem.canDrop)
+        {
+            inventory.dropItem(mouseItem.hoverItem.item);
+        }
     }
 
     public void updateSlots()
@@ -64,9 +74,11 @@ public class DisplayInventory : MonoBehaviour
             AddEvent(obj, EventTriggerType.BeginDrag, delegate { OnStartDrag(obj); });
             AddEvent(obj, EventTriggerType.EndDrag, delegate { OnExitDrag(obj); });
             AddEvent(obj, EventTriggerType.Drag, delegate { OnDrag(obj); });
+            AddEvent(obj, EventTriggerType.PointerClick, delegate { OnClick(obj); });
 
             itemsDisplayed.Add(obj, inventory.Container.Items[i]);
         }
+
     }
 
     private void AddEvent(GameObject obj, EventTriggerType type, UnityAction<BaseEventData> action)
@@ -82,20 +94,24 @@ public class DisplayInventory : MonoBehaviour
     {
         mouseItem.hoverObject = obj;
         if (itemsDisplayed.ContainsKey(obj))
-        { 
+        {
             mouseItem.hoverItem = itemsDisplayed[obj];
+            if (itemsDisplayed[obj].ID >= 0)
+            {
+                mouseItem.canDrop = true; 
+            }
         }
     }
 
     public void OnExit(GameObject obj)
     {
         mouseItem.hoverObject = null;
-        mouseItem.hoverItem = null; 
+        mouseItem.hoverItem = null;
+        mouseItem.canDrop = false; 
     }
 
     public void OnStartDrag(GameObject obj)
     {
-        Debug.Log(obj.name);
         var mouseObject = new GameObject();
         var rt = mouseObject.AddComponent<RectTransform>();
         rt.sizeDelta = new Vector2(35, 35);
@@ -134,6 +150,37 @@ public class DisplayInventory : MonoBehaviour
 
     }
 
+    public void OnClick(GameObject obj)
+    {
+        if (itemsDisplayed[obj].ID >= 0)
+        {
+            if (mouseItem.prevObj == null)
+                mouseItem.prevObj = obj;
+
+            if (mouseItem.hoverItem != itemsDisplayed[mouseItem.prevObj] && invMenuController.getMenuState())
+            {
+                invMenuController.toggleMenu(getItemSlot(mouseItem.prevObj), itemsDisplayed[obj]);
+                mouseItem.prevObj = obj;
+                invMenuController.toggleMenu(getItemSlot(obj), itemsDisplayed[obj]);
+                return;
+            }
+            invMenuController.toggleMenu(getItemSlot(obj), itemsDisplayed[obj]);
+            mouseItem.prevObj = obj;
+        }
+    }
+
+    public int getItemSlot(GameObject obj)
+    {
+        for (int i = 0; i < inventory.Container.Items.Length; i++)
+        {
+            if (inventory.Container.Items[i].ID == itemsDisplayed[obj].ID)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public Vector3 getPositionItems(int i)
     {
         return new Vector3(X_SPACE_BETWEEN_ITEMS, Y_START + (-Y_SPACE_BETWEEN_ITEMS * (i % NUMBER_OF_ROWS)), 0f);
@@ -149,6 +196,8 @@ public class MouseItem
 {
     public GameObject obj;
     public InventorySlot item;
-    public InventorySlot hoverItem; 
-    public GameObject hoverObject; 
+    public InventorySlot hoverItem;
+    public GameObject hoverObject;
+    public GameObject prevObj;
+    public bool canDrop; 
 }

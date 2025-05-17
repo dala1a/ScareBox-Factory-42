@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerLook : MonoBehaviour
 {
 
-    [SerializeField] private Camera cam; 
-    [SerializeField] private float xSens = 10; 
-    [SerializeField] private float ySens = 10; 
+    [SerializeField] private Camera cam;
+    [SerializeField] private float xSens = 10;
+    [SerializeField] private float ySens = 10;
 
     private float xRotation = 0f;
-    private bool locked = true; 
+    private bool locked = true;
 
     void Start()
     {
@@ -19,12 +19,12 @@ public class PlayerLook : MonoBehaviour
 
     }
 
-     public void ToggleLock()
+    public void ToggleLock()
     {
         if (locked)
         {
             Cursor.lockState = CursorLockMode.None;
-            locked = false; 
+            locked = false;
         }
         else
         {
@@ -44,6 +44,11 @@ public class PlayerLook : MonoBehaviour
         cam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
         transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * xSens);
 
+    }
+
+    public Camera GetCamera()
+    {
+        return cam; 
     }
 
 }

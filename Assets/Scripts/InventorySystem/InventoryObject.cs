@@ -11,6 +11,7 @@ public class InventoryObject : ScriptableObject
     public ItemDatabaseObject database;
     public string savePath;
 
+
     public void addItem(ItemObject _item, int _amount)
     {
         for (int i = 0; i < Container.Items.Length; i++)
@@ -22,6 +23,11 @@ public class InventoryObject : ScriptableObject
             }
         }
         setEmptySlot(_item, _amount);
+    }
+
+    public void dropItem(ItemObject _item) 
+    { 
+ 
     }
 
 
@@ -95,6 +101,7 @@ public class InventorySlot
     public ItemObject item;
     public int amount;
     public int ID = -1;
+    public int slotNumber; 
 
     public InventorySlot()
     {
