@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using UnityEngine;
-
-public class PlayerMovement : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour
 {
 
     [SerializeField] private CharacterController characterController; 
@@ -70,3 +69,5 @@ public class PlayerMovement : MonoBehaviour
     }
 
 }
+
+

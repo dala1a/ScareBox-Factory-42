@@ -6,8 +6,8 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
 
-    [SerializeField] private PlayerMovement playerMovement; 
-    [SerializeField] private PlayerLook playerLook;
+   // [SerializeField] private PlayerMovement playerMovement; 
+    //[SerializeField] private PlayerLook playerLook;
     [SerializeField] private GameObject displayInventory;
 
     private PlayerInput playerInput; 
@@ -19,8 +19,8 @@ public class InputManager : MonoBehaviour
         playerInput = new PlayerInput();
         onFoot = playerInput.OnFoot;
 
-        onFoot.Jump.performed += ctx => playerMovement.jump();
-        onFoot.CursorLock.performed += ctx => playerLook.ToggleLock();
+        //onFoot.Jump.performed += ctx => playerMovement.jump();
+        //onFoot.CursorLock.performed += ctx => playerLook.ToggleLock();
         onFoot.DropItem.performed += ctx => dropItem();
     }
 
@@ -29,15 +29,15 @@ public class InputManager : MonoBehaviour
         displayInventory.GetComponent<DisplayInventory>().dropItem(); 
     }
 
-    private void FixedUpdate()
-    {
-        playerMovement.ProcessMove(onFoot.Movement.ReadValue<Vector2>());
-    }
+    // private void FixedUpdate()
+    // {
+    //     playerMovement.ProcessMove(onFoot.Movement.ReadValue<Vector2>());
+    // }
 
-    private void LateUpdate()
-    { 
-        playerLook.ProcessLook(onFoot.Look.ReadValue<Vector2>()); 
-    }
+    // private void LateUpdate()
+    // { 
+    //     playerLook.ProcessLook(onFoot.Look.ReadValue<Vector2>()); 
+    // }
 
     private void OnEnable()
     { 
