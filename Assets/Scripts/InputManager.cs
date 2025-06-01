@@ -21,7 +21,7 @@ public class InputManager : MonoBehaviour
 
         //onFoot.Jump.performed += ctx => playerMovement.jump();
         //onFoot.CursorLock.performed += ctx => playerLook.ToggleLock();
-        onFoot.DropItem.performed += ctx => dropItem();
+        // onFoot.DropItem.performed += ctx => dropItem();
     }
 
     private void dropItem()

@@ -103,6 +103,17 @@ public class FirstPersonController : MonoBehaviour
 
     #endregion
 
+    #region Tumble Launch
+    public float launchForce = 420f; // Adjust this for launch power
+    public int predictionStepsPerFrame = 6;
+    [SerializeField] public Vector3 tumbleVel; 
+    private bool launched = false;
+    private float timeOnGround = 0;
+    private float tumbleEndTime = 1f; 
+
+    #endregion
+
+
     #region Crouch
 
     public bool enableCrouch = true;
@@ -205,7 +216,21 @@ public class FirstPersonController : MonoBehaviour
         #region Camera
 
         // Control camera movement
-        if(cameraCanMove)
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            if (lockCursor)
+            {
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            lockCursor = !lockCursor; 
+        }
+
+        if (cameraCanMove)
         {
             yaw = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * mouseSensitivity;
 
@@ -332,22 +357,30 @@ public class FirstPersonController : MonoBehaviour
         }
 
         #endregion
+        #region Tumble Launch
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            launch();
+        }
+
+        #endregion
 
         #region Crouch
 
         if (enableCrouch)
         {
-            if(Input.GetKeyDown(crouchKey) && !holdToCrouch)
+            if (Input.GetKeyDown(crouchKey) && !holdToCrouch)
             {
                 Crouch();
             }
-            
-            if(Input.GetKeyDown(crouchKey) && holdToCrouch)
+
+            if (Input.GetKeyDown(crouchKey) && holdToCrouch)
             {
                 isCrouched = false;
                 Crouch();
             }
-            else if(Input.GetKeyUp(crouchKey) && holdToCrouch)
+            else if (Input.GetKeyUp(crouchKey) && holdToCrouch)
             {
                 isCrouched = true;
                 Crouch();
@@ -370,6 +403,38 @@ public class FirstPersonController : MonoBehaviour
 
         if (playerCanMove)
         {
+            timeOnGround += Time.deltaTime;
+            Debug.Log(timeOnGround);
+            if (launched)
+            {
+                Vector3 point1 = this.transform.position;
+                float stepSize = 1.0f / predictionStepsPerFrame;
+                for (float step = 0; step < 1; step += stepSize)
+                {
+                    if (isGrounded)
+                    {
+                        tumbleVel += new Vector3(Physics.gravity.x, 0, Physics.gravity.z) * stepSize * Time.deltaTime;
+
+                    }
+                    else
+                    {
+                        tumbleVel += Physics.gravity * stepSize * Time.deltaTime;
+                    }
+                    Vector3 point2 = point1 + tumbleVel * stepSize * Time.deltaTime;
+                    point1 = point2;
+                }
+                this.transform.position = point1; 
+
+                if (timeOnGround < tumbleEndTime)
+                {
+                    return;
+                }
+                else
+                {
+                    launched = false;
+                }
+            }
+            
             // Calculate how fast we should be moving
             Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
@@ -475,11 +540,37 @@ public class FirstPersonController : MonoBehaviour
         }
     }
 
+    private void launch()
+    {
+        if (!launched) // Make sure we only launch once
+        {
+            tumbleVel = this.transform.forward * launchForce;
+            launched = true; 
+            Crouch(); 
+            timeOnGround = 0;
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Vector3 point1 = this.transform.position;
+        Vector3 predicatedVel = tumbleVel;
+        float stepSize = .005f;
+        for (float step = 0; step <= 1; step += stepSize)
+        {
+            predicatedVel += Physics.gravity * stepSize;
+            Vector3 point2 = point1 + predicatedVel * stepSize;
+            Gizmos.DrawLine(point1, point2);
+            point1 = point2; 
+        }
+    }
+
     private void Crouch()
     {
         // Stands player up to full height
         // Brings walkSpeed back up to original speed
-        if(isCrouched)
+        if (isCrouched)
         {
             transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
             walkSpeed /= speedReduction;
