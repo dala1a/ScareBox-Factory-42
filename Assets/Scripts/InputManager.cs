@@ -22,19 +22,20 @@ public class InputManager : MonoBehaviour
         //onFoot.Jump.performed += ctx => playerMovement.jump();
         //onFoot.CursorLock.performed += ctx => playerLook.ToggleLock();
         // onFoot.DropItem.performed += ctx => dropItem();
-        onFoot.Inv1.performed += ctx => selectSlot1(); 
-        onFoot.Inv2.performed += ctx => selectSlot2(); 
-        onFoot.Inv3.performed += ctx => selectSlot3(); 
-        onFoot.Inv4.performed += ctx => selectSlot4(); 
-        onFoot.Inv5.performed += ctx => selectSlot5(); 
-        onFoot.Inv6.performed += ctx => selectSlot6(); 
-        onFoot.Inv7.performed += ctx => selectSlot7(); 
+        onFoot.Inv1.performed += ctx => selectSlot1();
+        onFoot.Inv2.performed += ctx => selectSlot2();
+        onFoot.Inv3.performed += ctx => selectSlot3();
+        onFoot.Inv4.performed += ctx => selectSlot4();
+        onFoot.Inv5.performed += ctx => selectSlot5();
+        onFoot.Inv6.performed += ctx => selectSlot6();
+        onFoot.Inv7.performed += ctx => selectSlot7();
+        onFoot.UseItem.performed += ctx => useItem(); 
 
     }
 
-    private void dropItem()
+    private void useItem()
     {
-        displayInventory.GetComponent<DisplayInventory>().dropItem(); 
+        displayInventory.GetComponent<DisplayInventory>().useItem(); 
     }
 
     private void selectSlot1()

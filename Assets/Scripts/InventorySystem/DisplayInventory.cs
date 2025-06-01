@@ -20,6 +20,8 @@ public class DisplayInventory : MonoBehaviour
     public GameObject InventoryPrefab;
     private GameObject[] invPrefabList = new GameObject[7];
 
+    [SerializeField] PhoneScript phoneScript; 
+
 
     Dictionary<GameObject, InventorySlot> itemsDisplayed = new Dictionary<GameObject, InventorySlot>();
 
@@ -61,6 +63,7 @@ public class DisplayInventory : MonoBehaviour
             }
         }
     }
+    
 
     public void createSlots()
     {
@@ -80,8 +83,28 @@ public class DisplayInventory : MonoBehaviour
 
             itemsDisplayed.Add(obj, inventory.Container.Items[i]);
         }
-        unselectAllSlots(); 
+        unselectAllSlots();
 
+    }
+
+    public void useItem()
+    {
+        InventorySlot equippedItem = getEquippedItem();
+        if (equippedItem.ID == 2)
+        { 
+            phoneScript.togglePhone();
+        }
+    }
+
+    public InventorySlot getEquippedItem() {
+        for (int i = 0; i < inventory.Container.Items.Length; i++)
+        {
+            if (inventory.Container.Items[i].isEquipped == true)
+            {
+                return inventory.Container.Items[i];
+            }
+        }
+        return null;
     }
 
     private void AddEvent(GameObject obj, EventTriggerType type, UnityAction<BaseEventData> action)

@@ -723,6 +723,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""UseItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""60651e32-88d6-4019-be26-3d3304366fdb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -923,6 +932,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Inv7"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0878f96d-be4a-4603-b434-530c3dfbd59a"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1017,6 +1037,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_OnFoot_Inv5 = m_OnFoot.FindAction("Inv5", throwIfNotFound: true);
         m_OnFoot_Inv6 = m_OnFoot.FindAction("Inv6", throwIfNotFound: true);
         m_OnFoot_Inv7 = m_OnFoot.FindAction("Inv7", throwIfNotFound: true);
+        m_OnFoot_UseItem = m_OnFoot.FindAction("UseItem", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -1306,6 +1327,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Inv5;
     private readonly InputAction m_OnFoot_Inv6;
     private readonly InputAction m_OnFoot_Inv7;
+    private readonly InputAction m_OnFoot_UseItem;
     /// <summary>
     /// Provides access to input actions defined in input action map "OnFoot".
     /// </summary>
@@ -1369,6 +1391,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "OnFoot/Inv7".
         /// </summary>
         public InputAction @Inv7 => m_Wrapper.m_OnFoot_Inv7;
+        /// <summary>
+        /// Provides access to the underlying input action "OnFoot/UseItem".
+        /// </summary>
+        public InputAction @UseItem => m_Wrapper.m_OnFoot_UseItem;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1434,6 +1460,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Inv7.started += instance.OnInv7;
             @Inv7.performed += instance.OnInv7;
             @Inv7.canceled += instance.OnInv7;
+            @UseItem.started += instance.OnUseItem;
+            @UseItem.performed += instance.OnUseItem;
+            @UseItem.canceled += instance.OnUseItem;
         }
 
         /// <summary>
@@ -1484,6 +1513,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Inv7.started -= instance.OnInv7;
             @Inv7.performed -= instance.OnInv7;
             @Inv7.canceled -= instance.OnInv7;
+            @UseItem.started -= instance.OnUseItem;
+            @UseItem.performed -= instance.OnUseItem;
+            @UseItem.canceled -= instance.OnUseItem;
         }
 
         /// <summary>
@@ -1758,5 +1790,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInv7(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "UseItem" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUseItem(InputAction.CallbackContext context);
     }
 }
