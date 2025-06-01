@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class DisplayInventory : MonoBehaviour
 {
     public InvMenuController invMenuController;
-    public MouseItem mouseItem = new MouseItem(); 
+    public MouseItem mouseItem = new MouseItem();
     public InventoryObject inventory;
     public int X_SPACE_BETWEEN_ITEMS;
     public int Y_SPACE_BETWEEN_ITEMS;
@@ -18,6 +18,7 @@ public class DisplayInventory : MonoBehaviour
     public int Y_START_SLOTS;
     public int NUMBER_OF_ROWS;
     public GameObject InventoryPrefab;
+    private GameObject[] invPrefabList = new GameObject[7];
 
 
     Dictionary<GameObject, InventorySlot> itemsDisplayed = new Dictionary<GameObject, InventorySlot>();
@@ -30,7 +31,7 @@ public class DisplayInventory : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
+    {
 
         updateSlots();
     }
@@ -68,6 +69,7 @@ public class DisplayInventory : MonoBehaviour
         {
             var obj = Instantiate(InventoryPrefab, Vector3.zero, Quaternion.identity, transform);
             obj.GetComponent<RectTransform>().localPosition = getPositionSlots(i);
+            invPrefabList[i] = obj;
 
             AddEvent(obj, EventTriggerType.PointerEnter, delegate { OnEnter(obj); });
             AddEvent(obj, EventTriggerType.PointerExit, delegate { OnExit(obj); });
@@ -78,6 +80,7 @@ public class DisplayInventory : MonoBehaviour
 
             itemsDisplayed.Add(obj, inventory.Container.Items[i]);
         }
+        unselectAllSlots(); 
 
     }
 
@@ -98,7 +101,7 @@ public class DisplayInventory : MonoBehaviour
             mouseItem.hoverItem = itemsDisplayed[obj];
             if (itemsDisplayed[obj].ID >= 0)
             {
-                mouseItem.canDrop = true; 
+                mouseItem.canDrop = true;
             }
         }
     }
@@ -107,7 +110,7 @@ public class DisplayInventory : MonoBehaviour
     {
         mouseItem.hoverObject = null;
         mouseItem.hoverItem = null;
-        mouseItem.canDrop = false; 
+        mouseItem.canDrop = false;
     }
 
     public void OnStartDrag(GameObject obj)
@@ -122,7 +125,7 @@ public class DisplayInventory : MonoBehaviour
             img.sprite = inventory.database.GetItem[itemsDisplayed[obj].ID].uiDisplay;
             img.raycastTarget = false;
         }
-        mouseItem.obj = mouseObject; 
+        mouseItem.obj = mouseObject;
         mouseItem.item = itemsDisplayed[obj];
     }
 
@@ -137,7 +140,7 @@ public class DisplayInventory : MonoBehaviour
 
         }
         Destroy(mouseItem.obj);
-        mouseItem.item = null; 
+        mouseItem.item = null;
 
     }
 
@@ -145,7 +148,7 @@ public class DisplayInventory : MonoBehaviour
     {
         if (mouseItem.obj != null)
         {
-            mouseItem.obj.GetComponent<RectTransform>().position = Input.mousePosition; 
+            mouseItem.obj.GetComponent<RectTransform>().position = Input.mousePosition;
         }
 
     }
@@ -190,6 +193,70 @@ public class DisplayInventory : MonoBehaviour
     {
         return new Vector3(X_SPACE_BETWEEN_SLOTS, Y_START_SLOTS + (-Y_SPACE_BETWEEN_SLOTS * (i % NUMBER_OF_ROWS)), 0f);
     }
+
+    public void selectSlots()
+    { 
+        
+    }
+
+    public void selectSlot1()
+    {
+        unselectAllSlots();
+        invPrefabList[0].GetComponent<Image>().color = new Color(0, 0, 0, 1);
+        inventory.Container.Items[0].equipItem(); 
+    }
+
+    public void selectSlot2()
+    {
+        unselectAllSlots();
+        invPrefabList[1].GetComponent<Image>().color = new Color(0, 0, 0, 1);
+        inventory.Container.Items[1].equipItem(); 
+    }
+
+    public void selectSlot3()
+    {
+        unselectAllSlots();
+        invPrefabList[2].GetComponent<Image>().color = new Color(0, 0, 0, 1);
+        inventory.Container.Items[2].equipItem(); 
+    }
+
+    public void selectSlot4()
+    {
+        unselectAllSlots();
+        invPrefabList[3].GetComponent<Image>().color = new Color(0, 0, 0, 1);
+        inventory.Container.Items[3].equipItem(); 
+    }
+
+    public void selectSlot5()
+    {
+        unselectAllSlots();
+        invPrefabList[4].GetComponent<Image>().color = new Color(0, 0, 0, 1);
+        inventory.Container.Items[4].equipItem(); 
+    }
+
+    public void selectSlot6()
+    {
+        unselectAllSlots();
+        invPrefabList[5].GetComponent<Image>().color = new Color(0, 0, 0, 1);
+        inventory.Container.Items[5].equipItem(); 
+    }
+
+    public void selectSlot7()
+    {
+        unselectAllSlots();
+        invPrefabList[6].GetComponent<Image>().color = new Color(0, 0, 0, 1);
+        inventory.Container.Items[6].equipItem(); 
+    }
+
+    public void unselectAllSlots()
+    {
+        for (int i = 0; i < invPrefabList.Length; i++)
+        {
+            invPrefabList[i].GetComponent<Image>().color = new Color(0, 0, 0, 0.62f);
+            inventory.Container.Items[i].unequipItem(); 
+        }
+    }
+
 }
 
 public class MouseItem

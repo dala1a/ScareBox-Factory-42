@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
@@ -101,13 +102,15 @@ public class InventorySlot
     public ItemObject item;
     public int amount;
     public int ID = -1;
-    public int slotNumber; 
+    public int slotNumber;
+    public bool isEquipped;
 
     public InventorySlot()
     {
         ID = -1;
         item = null;
         amount = 0;
+        isEquipped = false;
     }
 
     public InventorySlot(int _id, ItemObject _item, int _amount)
@@ -127,5 +130,15 @@ public class InventorySlot
         ID = _id;
         item = _item;
         amount = _amount;
+    }
+
+    public void equipItem()
+    {
+        isEquipped = true;
+    }
+
+    public void unequipItem()
+    {
+        isEquipped = false;
     }
 }

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3469052280360855038}
   - component: {fileID: 688423864303722345}
   m_Layer: 3
-  m_Name: Key Holder
+  m_Name: Phone Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

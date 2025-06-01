@@ -660,6 +660,69 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Inv1"",
+                    ""type"": ""Button"",
+                    ""id"": ""f434873e-05d9-4cca-b2af-787de8db8c80"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Inv2"",
+                    ""type"": ""Button"",
+                    ""id"": ""78c8be88-965d-450c-9501-c28db4a69710"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Inv3"",
+                    ""type"": ""Button"",
+                    ""id"": ""91c52245-af94-488b-b9d3-c826b10f691e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Inv4"",
+                    ""type"": ""Button"",
+                    ""id"": ""0c3ccfde-4abe-4570-8b93-51ad175df29c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Inv5"",
+                    ""type"": ""Button"",
+                    ""id"": ""e10ad2a5-95f9-43e9-b5b1-787fe34b3741"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Inv6"",
+                    ""type"": ""Button"",
+                    ""id"": ""29302b99-ef21-4ac5-9b04-05339dcd2266"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Inv7"",
+                    ""type"": ""Button"",
+                    ""id"": ""d4f6539a-04e3-47ae-86ea-9996773c151e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -783,6 +846,83 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""DropItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fae9e915-b32b-4643-99f9-a89f1cfc3cee"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Inv1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c226a7ef-2a46-4c66-9ab9-d51cf2391ad1"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Inv2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e20f70a1-b4f7-43fd-8729-f06f1ae158e3"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Inv3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""67676781-8c21-4ad3-9d26-eff1c39488c0"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Inv4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""050af8c6-8f2a-42e3-81ac-92364b381534"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Inv5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a24540d-fb08-4034-8862-7bf8186a318f"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Inv6"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""408b51f9-b1fd-41c0-a103-d100be8a9cac"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Inv7"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -870,6 +1010,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_OnFoot_Interact = m_OnFoot.FindAction("Interact", throwIfNotFound: true);
         m_OnFoot_CursorLock = m_OnFoot.FindAction("CursorLock", throwIfNotFound: true);
         m_OnFoot_DropItem = m_OnFoot.FindAction("DropItem", throwIfNotFound: true);
+        m_OnFoot_Inv1 = m_OnFoot.FindAction("Inv1", throwIfNotFound: true);
+        m_OnFoot_Inv2 = m_OnFoot.FindAction("Inv2", throwIfNotFound: true);
+        m_OnFoot_Inv3 = m_OnFoot.FindAction("Inv3", throwIfNotFound: true);
+        m_OnFoot_Inv4 = m_OnFoot.FindAction("Inv4", throwIfNotFound: true);
+        m_OnFoot_Inv5 = m_OnFoot.FindAction("Inv5", throwIfNotFound: true);
+        m_OnFoot_Inv6 = m_OnFoot.FindAction("Inv6", throwIfNotFound: true);
+        m_OnFoot_Inv7 = m_OnFoot.FindAction("Inv7", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -1152,6 +1299,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Interact;
     private readonly InputAction m_OnFoot_CursorLock;
     private readonly InputAction m_OnFoot_DropItem;
+    private readonly InputAction m_OnFoot_Inv1;
+    private readonly InputAction m_OnFoot_Inv2;
+    private readonly InputAction m_OnFoot_Inv3;
+    private readonly InputAction m_OnFoot_Inv4;
+    private readonly InputAction m_OnFoot_Inv5;
+    private readonly InputAction m_OnFoot_Inv6;
+    private readonly InputAction m_OnFoot_Inv7;
     /// <summary>
     /// Provides access to input actions defined in input action map "OnFoot".
     /// </summary>
@@ -1187,6 +1341,34 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "OnFoot/DropItem".
         /// </summary>
         public InputAction @DropItem => m_Wrapper.m_OnFoot_DropItem;
+        /// <summary>
+        /// Provides access to the underlying input action "OnFoot/Inv1".
+        /// </summary>
+        public InputAction @Inv1 => m_Wrapper.m_OnFoot_Inv1;
+        /// <summary>
+        /// Provides access to the underlying input action "OnFoot/Inv2".
+        /// </summary>
+        public InputAction @Inv2 => m_Wrapper.m_OnFoot_Inv2;
+        /// <summary>
+        /// Provides access to the underlying input action "OnFoot/Inv3".
+        /// </summary>
+        public InputAction @Inv3 => m_Wrapper.m_OnFoot_Inv3;
+        /// <summary>
+        /// Provides access to the underlying input action "OnFoot/Inv4".
+        /// </summary>
+        public InputAction @Inv4 => m_Wrapper.m_OnFoot_Inv4;
+        /// <summary>
+        /// Provides access to the underlying input action "OnFoot/Inv5".
+        /// </summary>
+        public InputAction @Inv5 => m_Wrapper.m_OnFoot_Inv5;
+        /// <summary>
+        /// Provides access to the underlying input action "OnFoot/Inv6".
+        /// </summary>
+        public InputAction @Inv6 => m_Wrapper.m_OnFoot_Inv6;
+        /// <summary>
+        /// Provides access to the underlying input action "OnFoot/Inv7".
+        /// </summary>
+        public InputAction @Inv7 => m_Wrapper.m_OnFoot_Inv7;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1231,6 +1413,27 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @DropItem.started += instance.OnDropItem;
             @DropItem.performed += instance.OnDropItem;
             @DropItem.canceled += instance.OnDropItem;
+            @Inv1.started += instance.OnInv1;
+            @Inv1.performed += instance.OnInv1;
+            @Inv1.canceled += instance.OnInv1;
+            @Inv2.started += instance.OnInv2;
+            @Inv2.performed += instance.OnInv2;
+            @Inv2.canceled += instance.OnInv2;
+            @Inv3.started += instance.OnInv3;
+            @Inv3.performed += instance.OnInv3;
+            @Inv3.canceled += instance.OnInv3;
+            @Inv4.started += instance.OnInv4;
+            @Inv4.performed += instance.OnInv4;
+            @Inv4.canceled += instance.OnInv4;
+            @Inv5.started += instance.OnInv5;
+            @Inv5.performed += instance.OnInv5;
+            @Inv5.canceled += instance.OnInv5;
+            @Inv6.started += instance.OnInv6;
+            @Inv6.performed += instance.OnInv6;
+            @Inv6.canceled += instance.OnInv6;
+            @Inv7.started += instance.OnInv7;
+            @Inv7.performed += instance.OnInv7;
+            @Inv7.canceled += instance.OnInv7;
         }
 
         /// <summary>
@@ -1260,6 +1463,27 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @DropItem.started -= instance.OnDropItem;
             @DropItem.performed -= instance.OnDropItem;
             @DropItem.canceled -= instance.OnDropItem;
+            @Inv1.started -= instance.OnInv1;
+            @Inv1.performed -= instance.OnInv1;
+            @Inv1.canceled -= instance.OnInv1;
+            @Inv2.started -= instance.OnInv2;
+            @Inv2.performed -= instance.OnInv2;
+            @Inv2.canceled -= instance.OnInv2;
+            @Inv3.started -= instance.OnInv3;
+            @Inv3.performed -= instance.OnInv3;
+            @Inv3.canceled -= instance.OnInv3;
+            @Inv4.started -= instance.OnInv4;
+            @Inv4.performed -= instance.OnInv4;
+            @Inv4.canceled -= instance.OnInv4;
+            @Inv5.started -= instance.OnInv5;
+            @Inv5.performed -= instance.OnInv5;
+            @Inv5.canceled -= instance.OnInv5;
+            @Inv6.started -= instance.OnInv6;
+            @Inv6.performed -= instance.OnInv6;
+            @Inv6.canceled -= instance.OnInv6;
+            @Inv7.started -= instance.OnInv7;
+            @Inv7.performed -= instance.OnInv7;
+            @Inv7.canceled -= instance.OnInv7;
         }
 
         /// <summary>
@@ -1485,5 +1709,54 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnDropItem(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Inv1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInv1(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Inv2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInv2(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Inv3" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInv3(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Inv4" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInv4(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Inv5" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInv5(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Inv6" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInv6(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Inv7" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInv7(InputAction.CallbackContext context);
     }
 }
