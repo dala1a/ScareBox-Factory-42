@@ -222,10 +222,12 @@ public class FirstPersonController : MonoBehaviour
             if (lockCursor)
             {
                 Cursor.lockState = CursorLockMode.None;
+                cameraCanMove = false;
             }
             else
             {
                 Cursor.lockState = CursorLockMode.Locked;
+                cameraCanMove = true; 
             }
             lockCursor = !lockCursor; 
         }
