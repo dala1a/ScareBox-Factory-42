@@ -245,41 +245,6 @@ ModelImporter:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-    - name: Tunnel Window Frame
-      parentName: Corridor Passthrough Windows(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0.000000015454312, y: -0.000000015454312, z: -0.7071068, w: 0.7071068}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Tunnel Window
-      parentName: Corridor Passthrough Windows(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0.000000015454312, y: -0.000000015454312, z: -0.7071068, w: 0.7071068}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Tunnel Ceiling006
-      parentName: Corridor Passthrough Windows(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Tunnel Piipes006
-      parentName: Corridor Passthrough Windows(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0.000000021855694, y: 0.00000011920929, z: -2.6054018e-15, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Tunnel Beams006
-      parentName: Corridor Passthrough Windows(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: -1.7112914e-15, y: 1, z: -0.000000021855694, w: -0.0000000754979}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Tunnel Floor006
-      parentName: Corridor Passthrough Windows(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Tunnel Window Wall
-      parentName: Corridor Passthrough Windows(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5

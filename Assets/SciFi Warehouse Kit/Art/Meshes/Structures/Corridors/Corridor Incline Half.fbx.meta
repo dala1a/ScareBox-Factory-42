@@ -237,41 +237,6 @@ ModelImporter:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-    - name: Tunnel Incline Ceiling002
-      parentName: Corridor Incline Half(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Tunnel Incline Floor002
-      parentName: Corridor Incline Half(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Tunnel Incline Pipes002
-      parentName: Corridor Incline Half(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0.000000021855694, y: 0.00000011920929, z: -2.6054018e-15, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Tunnel Incline Steps002
-      parentName: Corridor Incline Half(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0.7071068, y: -0.000000008458289, z: -0.7071067, w: -0.00000000845829}
-      scale: {x: -1, y: -1, z: -1.82712}
-    - name: Tunnel Incline Walls002
-      parentName: Corridor Incline Half(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Tunnel Stair Rails002
-      parentName: Corridor Incline Half(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0.7071068, y: -0.000000008458289, z: -0.7071067, w: -0.00000000845829}
-      scale: {x: -1, y: -1, z: -1.82712}
-    - name: Tunnel Incline Beams002
-      parentName: Corridor Incline Half(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: -1.7112914e-15, y: 1, z: -0.000000021855694, w: -0.0000000754979}
-      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5

@@ -139,16 +139,6 @@ ModelImporter:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-    - name: SciFi_WallLight
-      parentName: Wall Light(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: -0.5, y: -0.5, z: 0.5, w: 0.5}
-      scale: {x: 2.931453, y: 2.931453, z: 2.931453}
-    - name: SciFi_WallLightBulb
-      parentName: Wall Light(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: -0.5, y: -0.5, z: 0.5, w: 0.5}
-      scale: {x: 2.931453, y: 2.931453, z: 2.931453}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
