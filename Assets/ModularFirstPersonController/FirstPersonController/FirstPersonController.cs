@@ -406,7 +406,7 @@ public class FirstPersonController : MonoBehaviour
         if (playerCanMove)
         {
             timeOnGround += Time.deltaTime;
-            Debug.Log(timeOnGround);
+            // Debug.Log(timeOnGround);
             if (launched)
             {
                 Vector3 point1 = this.transform.position;

@@ -16,7 +16,7 @@ public class PickUp : MonoBehaviour
     }
 
     public void asdasdas() { 
-        Debug.Log("PICKING UP OBJECT LOL"); 
+        // Debug.Log("PICKING UP OBJECT LOL"); 
     }
 
 
