@@ -40,7 +40,7 @@ public class DisplayInventory : MonoBehaviour
 
     public void dropItem()
     {
-        Debug.Log("DRIOPIG");
+        // Debug.Log("DRIOPIG");
         if (mouseItem.canDrop)
         {
             inventory.dropItem(mouseItem.hoverItem.item);
