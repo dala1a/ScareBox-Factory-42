@@ -43831,7 +43831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e395cbf69ffb3ea489c3e8d47f3c0a12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialState: 0
+  initialState: 1
   navMeshAgent: {fileID: 0}
   config: {fileID: 11400000, guid: 64af970442570244d8359f08d7e33d11, type: 2}
   playerTransform: {fileID: 0}
@@ -43857,7 +43857,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
