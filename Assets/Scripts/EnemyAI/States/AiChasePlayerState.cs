@@ -24,15 +24,32 @@ public class AiChasePlayerState : AiState
     public void Update(AiAgent agent)
     {
         timer -= Time.deltaTime;
+        float shortestDistance = 0;
+
         if (timer <= 0.0f)
         {
             float distance = (agent.playerTransform.position - agent.navMeshAgent.destination).sqrMagnitude;
-            if (distance > agent.config.maxDist * agent.config.maxDist)
+            shortestDistance = Vector3.Distance(agent.playerTransform.position, agent.navMeshAgent.nextPosition);
+
+            Debug.Log(shortestDistance);
+
+
+            if (shortestDistance > agent.config.maxAgroRange)
             {
-                agent.navMeshAgent.destination = agent.playerTransform.position;
+                agent.stateMachine.changeState(AiStateID.RoamState);
             }
+            else
+            {            
+                if (distance > agent.config.maxDist * agent.config.maxDist)
+                {
+                    agent.navMeshAgent.destination = agent.playerTransform.position;
+                }
+            }
+
             timer = agent.config.maxTime;
         }
+        
+
     }
 
 }

@@ -2,8 +2,9 @@ using UnityEngine;
 
 public enum AiStateID
 {
-    ChasePlayer, 
-    Idle
+    ChasePlayer,
+    Idle,
+    RoamState
 }
 
 public interface AiState

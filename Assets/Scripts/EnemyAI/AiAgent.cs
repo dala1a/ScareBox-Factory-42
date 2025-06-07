@@ -9,6 +9,7 @@ public class AiAgent : MonoBehaviour
     public NavMeshAgent navMeshAgent;
     public AiAgentConfig config; 
     public Transform playerTransform;
+    public Transform waypoints;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -22,6 +23,7 @@ public class AiAgent : MonoBehaviour
         stateMachine = new AiStateMachine(this);
         stateMachine.registerState(new AiChasePlayerState()); 
         stateMachine.registerState(new AiIdlePlayerState());
+        stateMachine.registerState(new AirRoamState());
         stateMachine.changeState(initialState);  
     }
 
