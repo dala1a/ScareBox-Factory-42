@@ -33,14 +33,6 @@ public class AiChasePlayerState : AiState
             }
             timer = agent.config.maxTime;
         }
-        
-        Vector3 playerDirection = agent.playerTransform.position - agent.transform.position;
-        // Vector3 agentDirection = agent.transform.forward;
-
-        if (playerDirection.magnitude > agent.config.maxSightDistance)
-        {
-            agent.stateMachine.changeState(AiStateID.Idle) ;
-        }
     }
 
 }
