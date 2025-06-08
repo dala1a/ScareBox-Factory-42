@@ -6924,7 +6924,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &248624885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72146,6 +72146,7 @@ MonoBehaviour:
   Y_START_SLOTS: 357
   NUMBER_OF_ROWS: 7
   InventoryPrefab: {fileID: 1064730523673120589, guid: 41eba56e40b415845b53906eee00cf9e, type: 3}
+  flashlight: {fileID: 346026796}
   phoneScript: {fileID: 9210997116458742107}
 --- !u!4 &3991247545280247081 stripped
 Transform:
@@ -72211,7 +72212,7 @@ PrefabInstance:
     - target: {fileID: 8746798342013058579, guid: 40fb7348d1eea9040a7f4d27632efac6, type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 11400000, guid: 37774fcfe4c5519419614b36240ba447, type: 2}
+      objectReference: {fileID: 11400000, guid: 7dd66612eb22c17429737b6d8148b72d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
