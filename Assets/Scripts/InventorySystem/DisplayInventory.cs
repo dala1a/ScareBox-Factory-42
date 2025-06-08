@@ -19,8 +19,10 @@ public class DisplayInventory : MonoBehaviour
     public int NUMBER_OF_ROWS;
     public GameObject InventoryPrefab;
     private GameObject[] invPrefabList = new GameObject[7];
+    private bool isFlashlightOn = false;
+    public GameObject flashlight;
 
-    [SerializeField] PhoneScript phoneScript; 
+    [SerializeField] PhoneScript phoneScript;
 
 
     Dictionary<GameObject, InventorySlot> itemsDisplayed = new Dictionary<GameObject, InventorySlot>();
@@ -63,7 +65,7 @@ public class DisplayInventory : MonoBehaviour
             }
         }
     }
-    
+
 
     public void createSlots()
     {
@@ -87,16 +89,35 @@ public class DisplayInventory : MonoBehaviour
 
     }
 
+
+
+    private void resetInventoryItems()
+    {
+        // PHONE
+        phoneScript.turnOffPhone();
+
+        // FLASHLIGHT
+        flashlight.SetActive(false);
+        isFlashlightOn = false; 
+    
+        //
+    }
+
     public void useItem()
     {
         InventorySlot equippedItem = getEquippedItem();
         if (equippedItem.ID == 2)
-        { 
+        {
             phoneScript.togglePhone();
+        }
+        if (equippedItem.ID == 1)
+        {
+            toggleLight();
         }
     }
 
-    public InventorySlot getEquippedItem() {
+    public InventorySlot getEquippedItem()
+    {
         for (int i = 0; i < inventory.Container.Items.Length; i++)
         {
             if (inventory.Container.Items[i].isEquipped == true)
@@ -173,6 +194,7 @@ public class DisplayInventory : MonoBehaviour
         {
             mouseItem.obj.GetComponent<RectTransform>().position = Input.mousePosition;
         }
+        resetInventoryItems();
 
     }
 
@@ -217,58 +239,60 @@ public class DisplayInventory : MonoBehaviour
         return new Vector3(X_SPACE_BETWEEN_SLOTS, Y_START_SLOTS + (-Y_SPACE_BETWEEN_SLOTS * (i % NUMBER_OF_ROWS)), 0f);
     }
 
-    public void selectSlots()
-    { 
-        
-    }
-
     public void selectSlot1()
     {
         unselectAllSlots();
         invPrefabList[0].GetComponent<Image>().color = new Color(0, 0, 0, 1);
-        inventory.Container.Items[0].equipItem(); 
+        inventory.Container.Items[0].equipItem();
+        resetInventoryItems();
     }
 
     public void selectSlot2()
     {
         unselectAllSlots();
         invPrefabList[1].GetComponent<Image>().color = new Color(0, 0, 0, 1);
-        inventory.Container.Items[1].equipItem(); 
+        inventory.Container.Items[1].equipItem();
+        resetInventoryItems(); 
     }
 
     public void selectSlot3()
     {
         unselectAllSlots();
         invPrefabList[2].GetComponent<Image>().color = new Color(0, 0, 0, 1);
-        inventory.Container.Items[2].equipItem(); 
+        inventory.Container.Items[2].equipItem();
+        resetInventoryItems();
     }
 
     public void selectSlot4()
     {
         unselectAllSlots();
         invPrefabList[3].GetComponent<Image>().color = new Color(0, 0, 0, 1);
-        inventory.Container.Items[3].equipItem(); 
+        inventory.Container.Items[3].equipItem();
+        resetInventoryItems();
     }
 
     public void selectSlot5()
     {
         unselectAllSlots();
         invPrefabList[4].GetComponent<Image>().color = new Color(0, 0, 0, 1);
-        inventory.Container.Items[4].equipItem(); 
+        inventory.Container.Items[4].equipItem();
+        resetInventoryItems();
     }
 
     public void selectSlot6()
     {
         unselectAllSlots();
         invPrefabList[5].GetComponent<Image>().color = new Color(0, 0, 0, 1);
-        inventory.Container.Items[5].equipItem(); 
+        inventory.Container.Items[5].equipItem();
+        resetInventoryItems();
     }
 
     public void selectSlot7()
     {
         unselectAllSlots();
         invPrefabList[6].GetComponent<Image>().color = new Color(0, 0, 0, 1);
-        inventory.Container.Items[6].equipItem(); 
+        inventory.Container.Items[6].equipItem();
+        resetInventoryItems();
     }
 
     public void unselectAllSlots()
@@ -276,9 +300,26 @@ public class DisplayInventory : MonoBehaviour
         for (int i = 0; i < invPrefabList.Length; i++)
         {
             invPrefabList[i].GetComponent<Image>().color = new Color(0, 0, 0, 0.62f);
-            inventory.Container.Items[i].unequipItem(); 
+            inventory.Container.Items[i].unequipItem();
+            resetInventoryItems();
         }
     }
+
+    private void toggleLight()
+    {
+        isFlashlightOn = !isFlashlightOn;
+
+        if (isFlashlightOn)
+        {
+            flashlight.SetActive(true);
+        }
+        else
+        {
+            flashlight.SetActive(false);
+        }
+    }
+
+
 
 }
 

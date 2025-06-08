@@ -24,4 +24,12 @@ public class PhoneScript : MonoBehaviour
         }
     }
 
+    public void turnOffPhone()
+    {
+        if (isPhoneOn)
+        { 
+            animator.Play("ClosePhone", 0, 0.0f);
+        }
+    }
+
 }
