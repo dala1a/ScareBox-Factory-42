@@ -181,30 +181,30 @@ public class FirstPersonController : MonoBehaviour
 
         sprintBarCG = GetComponentInChildren<CanvasGroup>();
 
-        if(useSprintBar)
-        {
-            sprintBarBG.gameObject.SetActive(true);
-            sprintBar.gameObject.SetActive(true);
+        // if(useSprintBar)
+        // {
+        //     sprintBarBG.gameObject.SetActive(true);
+        //     sprintBar.gameObject.SetActive(true);
 
-            float screenWidth = Screen.width;
-            float screenHeight = Screen.height;
+        //     float screenWidth = Screen.width;
+        //     float screenHeight = Screen.height;
 
-            sprintBarWidth = screenWidth * sprintBarWidthPercent;
-            sprintBarHeight = screenHeight * sprintBarHeightPercent;
+        //     sprintBarWidth = screenWidth * sprintBarWidthPercent;
+        //     sprintBarHeight = screenHeight * sprintBarHeightPercent;
 
-            sprintBarBG.rectTransform.sizeDelta = new Vector3(sprintBarWidth, sprintBarHeight, 0f);
-            sprintBar.rectTransform.sizeDelta = new Vector3(sprintBarWidth - 2, sprintBarHeight - 2, 0f);
+        //     sprintBarBG.rectTransform.sizeDelta = new Vector3(sprintBarWidth, sprintBarHeight, 0f);
+        //     sprintBar.rectTransform.sizeDelta = new Vector3(sprintBarWidth - 2, sprintBarHeight - 2, 0f);
 
-            if(hideBarWhenFull)
-            {
-                sprintBarCG.alpha = 0;
-            }
-        }
-        else
-        {
-            sprintBarBG.gameObject.SetActive(false);
-            sprintBar.gameObject.SetActive(false);
-        }
+        //     if(hideBarWhenFull)
+        //     {
+        //         sprintBarCG.alpha = 0;
+        //     }
+        // }
+        // else
+        // {
+        //     sprintBarBG.gameObject.SetActive(false);
+        //     sprintBar.gameObject.SetActive(false);
+        // }
 
         #endregion
     }
@@ -344,7 +344,7 @@ public class FirstPersonController : MonoBehaviour
             if(useSprintBar && !unlimitedSprint)
             {
                 float sprintRemainingPercent = sprintRemaining / sprintDuration;
-                sprintBar.transform.localScale = new Vector3(sprintRemainingPercent, 1f, 1f);
+                sprintBar.fillAmount = sprintRemainingPercent; 
             }
         }
 
