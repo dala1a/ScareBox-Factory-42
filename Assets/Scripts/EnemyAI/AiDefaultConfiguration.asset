@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxTime: 0
   maxDist: 1
-  maxSightDistance: 5
+  maxSightDistance: 1
   maxAgroRange: 10

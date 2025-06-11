@@ -8,9 +8,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.VisualScripting;
+
 
 #if UNITY_EDITOR
-    using UnityEditor;
+using UnityEditor;
     using System.Net;
 #endif
 
@@ -109,7 +111,9 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] public Vector3 tumbleVel; 
     private bool launched = false;
     private float timeOnGround = 0;
-    private float tumbleEndTime = 1f; 
+    private float tumbleEndTime = 1f;
+    private float launchTimer = 0;
+    private float launchTimerEnd = 2; 
 
     #endregion
 
@@ -139,6 +143,22 @@ public class FirstPersonController : MonoBehaviour
     // Internal Variables
     private Vector3 jointOriginalPos;
     private float timer = 0;
+
+    #endregion
+
+    #region Sound Detection
+
+    public float soundRadius = 5f;
+    public GameObject soundPrefab;
+    public GameObject[] footsteps = new GameObject[5];
+    public int footstepCount = 0;
+    public GameObject playerSoundHitbox;
+    public bool isFootsteps = true;
+    public float footstepTimer = 0;
+    public float footstepTimerEnd = 1f;
+    public float notMovingTimer = 0;
+    public float notMovingTimerEnd = 3f;
+    public bool isMoving = false;
 
     #endregion
 
@@ -181,31 +201,6 @@ public class FirstPersonController : MonoBehaviour
 
         sprintBarCG = GetComponentInChildren<CanvasGroup>();
 
-        // if(useSprintBar)
-        // {
-        //     sprintBarBG.gameObject.SetActive(true);
-        //     sprintBar.gameObject.SetActive(true);
-
-        //     float screenWidth = Screen.width;
-        //     float screenHeight = Screen.height;
-
-        //     sprintBarWidth = screenWidth * sprintBarWidthPercent;
-        //     sprintBarHeight = screenHeight * sprintBarHeightPercent;
-
-        //     sprintBarBG.rectTransform.sizeDelta = new Vector3(sprintBarWidth, sprintBarHeight, 0f);
-        //     sprintBar.rectTransform.sizeDelta = new Vector3(sprintBarWidth - 2, sprintBarHeight - 2, 0f);
-
-        //     if(hideBarWhenFull)
-        //     {
-        //         sprintBarCG.alpha = 0;
-        //     }
-        // }
-        // else
-        // {
-        //     sprintBarBG.gameObject.SetActive(false);
-        //     sprintBar.gameObject.SetActive(false);
-        // }
-
         #endregion
     }
 
@@ -216,7 +211,6 @@ public class FirstPersonController : MonoBehaviour
         #region Camera
 
         // Control camera movement
-
         if (Input.GetKeyDown(KeyCode.B))
         {
             if (lockCursor)
@@ -301,29 +295,28 @@ public class FirstPersonController : MonoBehaviour
 
         #region Sprint
 
-        if(enableSprint)
+        if (isSprinting)
         {
-            if(isSprinting)
-            {
-                isZoomed = false;
-                playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, sprintFOV, sprintFOVStepTime * Time.deltaTime);
+            isZoomed = false;
+            isFootsteps = true;
+            playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, sprintFOV, sprintFOVStepTime * Time.deltaTime);
 
-                // Drain sprint remaining while sprinting
-                if(!unlimitedSprint)
+            // Drain sprint remaining while sprinting
+            if (!unlimitedSprint)
+            {
+                sprintRemaining -= 1 * Time.deltaTime;
+                if (sprintRemaining <= 0)
                 {
-                    sprintRemaining -= 1 * Time.deltaTime;
-                    if (sprintRemaining <= 0)
-                    {
-                        isSprinting = false;
-                        isSprintCooldown = true;
-                    }
+                    isSprinting = false;
+                    isSprintCooldown = true;
                 }
             }
-            else
-            {
-                // Regain sprint while not sprinting
-                sprintRemaining = Mathf.Clamp(sprintRemaining += 1 * Time.deltaTime, 0, sprintDuration);
-            }
+        }
+        else
+        {
+            // Regain sprint while not sprinting
+            sprintRemaining = Mathf.Clamp(sprintRemaining += 1 * Time.deltaTime, 0, sprintDuration);
+        }
 
             // Handles sprint cooldown 
             // When sprint remaining == 0 stops sprint ability until hitting cooldown
@@ -346,7 +339,7 @@ public class FirstPersonController : MonoBehaviour
                 float sprintRemainingPercent = sprintRemaining / sprintDuration;
                 sprintBar.fillAmount = sprintRemainingPercent; 
             }
-        }
+        
 
         #endregion
 
@@ -391,6 +384,15 @@ public class FirstPersonController : MonoBehaviour
 
         #endregion
 
+        #region Footsteps
+
+        if (isFootsteps)
+        {
+            enableFootsteps();
+        }
+
+        #endregion
+
         CheckGround();
 
         if(enableHeadBob)
@@ -402,6 +404,34 @@ public class FirstPersonController : MonoBehaviour
     void FixedUpdate()
     {
         #region Movement
+
+        if (launchTimer < launchTimerEnd)
+        {
+            launchTimer += Time.deltaTime;
+        }
+        else
+        {
+            launchTimer = launchTimerEnd;
+        }
+
+        if (footstepTimer < footstepTimerEnd)
+        {
+            footstepTimer += Time.deltaTime;
+        }
+        else
+        {
+            footstepTimer = footstepTimerEnd;
+        }
+
+        if (notMovingTimer < notMovingTimerEnd)
+        {
+            notMovingTimer += Time.deltaTime;
+        }
+        else
+        {
+            notMovingTimer = notMovingTimerEnd;
+        }
+
 
         if (playerCanMove)
         {
@@ -425,7 +455,7 @@ public class FirstPersonController : MonoBehaviour
                     Vector3 point2 = point1 + tumbleVel * stepSize * Time.deltaTime;
                     point1 = point2;
                 }
-                this.transform.position = point1; 
+                this.transform.position = point1;
 
                 if (timeOnGround < tumbleEndTime)
                 {
@@ -436,7 +466,7 @@ public class FirstPersonController : MonoBehaviour
                     launched = false;
                 }
             }
-            
+
             // Calculate how fast we should be moving
             Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
@@ -486,6 +516,15 @@ public class FirstPersonController : MonoBehaviour
             else
             {
                 isSprinting = false;
+
+                if (sprintRemaining < sprintDuration / 2)
+                {
+                    enableSprint = false;
+                }
+                else
+                {
+                    enableSprint = true;
+                }
 
                 if (hideBarWhenFull && sprintRemaining == sprintDuration)
                 {
@@ -543,14 +582,72 @@ public class FirstPersonController : MonoBehaviour
     }
 
     private void launch()
-    {
-        if (!launched) // Make sure we only launch once
+    {   
+        if (!launched && sprintRemaining > 2.5f && launchTimer == launchTimerEnd) // Make sure we only launch once
         {
             tumbleVel = this.transform.forward * launchForce;
-            launched = true; 
+            launched = true;
+            sprintRemaining -= sprintDuration/3;
+            launchTimer = 0;  
             Crouch(); 
             timeOnGround = 0;
         }
+    }
+
+    private void enableFootsteps()
+    {   
+        if (rb.linearVelocity == Vector3.zero && isMoving)
+        {
+            isMoving = false;
+            notMovingTimer = 0;
+        }
+        else if(rb.linearVelocity != Vector3.zero)
+        {
+            isMoving = true; 
+        }
+
+        if (!isMoving)
+        { 
+            if (notMovingTimer >= notMovingTimerEnd)
+            {
+                for (int i = 0; i < footsteps.Length; i++)
+                {
+                    Destroy(footsteps[i]);
+                    footsteps[i] = null;
+                }
+            }
+            return;
+        }
+
+        if (footstepTimer >= footstepTimerEnd)
+        {
+            if (footstepCount >= 5)
+            {
+                footstepCount = 0;
+            }
+
+            if (isSprinting)
+            {
+                soundRadius = 10;
+            }
+            else
+            {
+                soundRadius = 5;
+            }
+
+            var footstep = Instantiate(soundPrefab, playerSoundHitbox.transform);
+            footstep.transform.localScale = new Vector3(soundRadius * 2, soundRadius * 2, soundRadius * 2);
+            footstep.transform.position = this.transform.position;
+            if (footsteps[footstepCount] != null)
+            {
+                Destroy(footsteps[footstepCount]);
+                footsteps[footstepCount] = null;
+            }
+            footsteps[footstepCount] = footstep;
+            footstepCount++;
+            footstepTimer = 0;
+        }
+       
     }
 
     void OnDrawGizmos()
@@ -564,9 +661,12 @@ public class FirstPersonController : MonoBehaviour
             predicatedVel += Physics.gravity * stepSize;
             Vector3 point2 = point1 + predicatedVel * stepSize;
             Gizmos.DrawLine(point1, point2);
-            point1 = point2; 
+            point1 = point2;
         }
+        Gizmos.color = Color.green; 
+        Gizmos.DrawSphere(this.transform.position, soundRadius);
     }
+
 
     private void Crouch()
     {
@@ -576,7 +676,7 @@ public class FirstPersonController : MonoBehaviour
         {
             transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
             walkSpeed /= speedReduction;
-
+            isFootsteps = true;
             isCrouched = false;
         }
         // Crouches player down to set height
@@ -585,7 +685,7 @@ public class FirstPersonController : MonoBehaviour
         {
             transform.localScale = new Vector3(originalScale.x, crouchHeight, originalScale.z);
             walkSpeed *= speedReduction;
-
+            isFootsteps = false;
             isCrouched = true;
         }
     }
@@ -821,8 +921,21 @@ public class FirstPersonController : MonoBehaviour
 
         #endregion
 
+        #region Sound
+        EditorGUILayout.Space();
+        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+        GUILayout.Label("Sound", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleLeft, fontStyle = FontStyle.Bold, fontSize = 13 }, GUILayout.ExpandWidth(true));
+        EditorGUILayout.Space();
+
+        fpc.soundRadius = EditorGUILayout.Slider(new GUIContent("Sound Radius", "Radius of the player sound detection sphere"), fpc.soundRadius, .1f, 50);
+        EditorGUILayout.PrefixLabel(new GUIContent("Sound HB Prefab", "Prefab of the object that represents the player sound"));
+        fpc.soundPrefab = (GameObject) EditorGUILayout.ObjectField(fpc.soundPrefab, typeof(GameObject), true); 
+        EditorGUILayout.PrefixLabel(new GUIContent("Sound HB Folder", "Folder of the object that represents the player sound"));
+        fpc.playerSoundHitbox = (GameObject) EditorGUILayout.ObjectField(fpc.playerSoundHitbox, typeof(GameObject), true); 
+        #endregion
+
         //Sets any changes from the prefab
-        if(GUI.changed)
+        if (GUI.changed)
         {
             EditorUtility.SetDirty(fpc);
             Undo.RecordObject(fpc, "FPC Change");
