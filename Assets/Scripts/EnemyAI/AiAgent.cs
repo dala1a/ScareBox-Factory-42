@@ -1,35 +1,48 @@
 using UnityEngine;
 using UnityEngine.AI;
 
+/** 
+* Setup and hold variables that are used often for enemy states. 
+* @author: Yunseo jeon
+* @since 2025-05-29
+*/ 
 public class AiAgent : MonoBehaviour
 {
 
-    public AiStateMachine stateMachine;
-    public AiStateID initialState;
-    public NavMeshAgent navMeshAgent;
-    public AiAgentConfig config; 
-    public Transform playerTransform;
-    public Transform waypoints;
+    public AiStateMachine stateMachine; // Reference to the enemy states. 
+    public AiStateID initialState; // The state the enemy starts in
+    public NavMeshAgent navMeshAgent; // The enemy controller
+    public AiAgentConfig config; // Reference to the config class. 
+    public Transform playerTransform; // Reference to the players position. 
+    public Transform waypoints; // The waypoints the enemy traverses in the roam state. 
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    /** 
+    * Initializing variables and setting up enemy states. 
+    * @author: Yunseo Jeon
+    * @since: 2025-05-29
+    */ 
     void Start()
-    {   
+    {
         navMeshAgent = GetComponent<NavMeshAgent>();
         if (playerTransform == null)
         {
             playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         }
         stateMachine = new AiStateMachine(this);
-        stateMachine.registerState(new AiChasePlayerState()); 
+        stateMachine.registerState(new AiChasePlayerState());
         stateMachine.registerState(new AiIdlePlayerState());
         stateMachine.registerState(new AirRoamState());
-        stateMachine.changeState(initialState);  
+        stateMachine.changeState(initialState);
     }
 
-    // Update is called once per frame
+    /** 
+    * Updates the mechanics for whatever state the enemy is in. 
+    * @author: Yunseo Jeon
+    * @since: 2025-05-29
+    */ 
     void Update()
     {
-        stateMachine.update(); 
+        stateMachine.update();
     }
 }
