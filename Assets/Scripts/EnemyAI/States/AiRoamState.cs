@@ -53,6 +53,20 @@ public class AirRoamState : AiState
     public void Update(AiAgent agent)
     {
         Vector3 playerDirection = agent.playerTransform.position - agent.transform.position;
+        if (!(playerDirection.magnitude > agent.config.maxSightDistance))
+        { 
+            Vector3 agentDirection = agent.transform.forward;
+
+            playerDirection.Normalize();
+
+            float dotProduct = Vector3.Dot(playerDirection, agentDirection);
+            if (dotProduct > 0.0f)
+            {
+                agent.stateMachine.changeState(AiStateID.ChasePlayer);
+                return;
+            }
+        }
+
         if (agent.footstepsTrigger)
         {
             agent.navMeshAgent.SetDestination(agent.footstepPosition);
@@ -88,19 +102,6 @@ public class AirRoamState : AiState
             agent.navMeshAgent.SetDestination(agent.waypoints.GetChild(currentWaypoint).position);
         }
 
-        if (!(playerDirection.magnitude > agent.config.maxSightDistance))
-        { 
-            Vector3 agentDirection = agent.transform.forward;
-
-            playerDirection.Normalize();
-
-            float dotProduct = Vector3.Dot(playerDirection, agentDirection);
-            if (dotProduct > 0.0f)
-            {
-                agent.stateMachine.changeState(AiStateID.ChasePlayer);
-                return;
-            }
-        }
 
     }
 

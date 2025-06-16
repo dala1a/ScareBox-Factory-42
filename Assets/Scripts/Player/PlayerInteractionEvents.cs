@@ -5,6 +5,7 @@ public class PlayerInteractionEvents : MonoBehaviour
 
     private bool isPrisonOpen = false;
     private bool isLeverUp = true;
+    private bool isBossDoor = false;
 
 
     public void openPrisonDoor(Animator animator)
@@ -36,7 +37,7 @@ public class PlayerInteractionEvents : MonoBehaviour
     }
 
     public void toggleDoor(Animator animator)
-    {   
+    {
         if (isLeverUp)
         {
             animator.Play("DoorClose", 0, 0.0f);
@@ -45,6 +46,20 @@ public class PlayerInteractionEvents : MonoBehaviour
         {
             animator.Play("DoorOpen", 0, 0.0f);
         }
+    }
+
+    public void toggleBossDoor(Animator animator)
+    {
+
+        if (isBossDoor)
+        {
+            animator.Play("CloseDoor", 0, 0.0f);
+        }
+        else
+        {
+            animator.Play("OpenDoor", 0, 0.0f);
+        }
+        isBossDoor = !isBossDoor; 
     }
 
 
