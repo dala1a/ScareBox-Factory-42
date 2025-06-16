@@ -136,18 +136,26 @@ public class DisplayInventory : MonoBehaviour
     * Use an item depending on what item is equipped. 
     * @author: Yunseo Jeon
     * @since: 2025-05-23
-    */ 
+    */
     public void useItem()
     {
         InventorySlot equippedItem = getEquippedItem();
+        
+        if (equippedItem == null)
+        {
+            return;
+        }
+
+
         if (equippedItem.ID == 2)
         {
             phoneScript.togglePhone();
         }
-        if (equippedItem.ID == 1)
+        else if (equippedItem.ID == 1)
         {
             toggleLight();
         }
+        
     }
 
     /** 

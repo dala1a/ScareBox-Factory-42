@@ -12,7 +12,7 @@ public class EnemyAI : MonoBehaviour
     * @since: 2025-05-29
     */
     void Start()
-    {   
+    {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
     }

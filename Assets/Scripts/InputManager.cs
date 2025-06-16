@@ -9,6 +9,7 @@ public class InputManager : MonoBehaviour
    // [SerializeField] private PlayerMovement playerMovement; 
     //[SerializeField] private PlayerLook playerLook;
     [SerializeField] private GameObject displayInventory;
+    [SerializeField] private QuestController questController; 
 
     private PlayerInput playerInput; 
     public PlayerInput.OnFootActions onFoot;
@@ -35,7 +36,7 @@ public class InputManager : MonoBehaviour
 
     private void useItem()
     {
-        displayInventory.GetComponent<DisplayInventory>().useItem(); 
+        displayInventory.GetComponent<DisplayInventory>().useItem();
     }
 
     private void selectSlot1()

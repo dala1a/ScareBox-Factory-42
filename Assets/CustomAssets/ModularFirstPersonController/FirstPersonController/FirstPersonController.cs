@@ -464,6 +464,7 @@ public class FirstPersonController : MonoBehaviour
                 else
                 {
                     launched = false;
+                    transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
                 }
             }
 
@@ -589,7 +590,7 @@ public class FirstPersonController : MonoBehaviour
             launched = true;
             sprintRemaining -= sprintDuration/3;
             launchTimer = 0;  
-            Crouch(); 
+            transform.localScale = new Vector3(originalScale.x, crouchHeight, originalScale.z);
             timeOnGround = 0;
         }
     }
@@ -663,8 +664,6 @@ public class FirstPersonController : MonoBehaviour
             Gizmos.DrawLine(point1, point2);
             point1 = point2;
         }
-        Gizmos.color = Color.green; 
-        Gizmos.DrawSphere(this.transform.position, soundRadius);
     }
 
 
@@ -686,7 +685,13 @@ public class FirstPersonController : MonoBehaviour
             transform.localScale = new Vector3(originalScale.x, crouchHeight, originalScale.z);
             walkSpeed *= speedReduction;
             isFootsteps = false;
+            for (int i = 0; i < footsteps.Length; i++)
+            {
+                Destroy(footsteps[i]);
+                footsteps[i] = null;
+            }
             isCrouched = true;
+            footstepCount = 0; 
         }
     }
 

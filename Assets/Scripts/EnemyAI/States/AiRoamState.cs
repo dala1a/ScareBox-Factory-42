@@ -4,14 +4,17 @@ public class AirRoamState : AiState
 {
 
     int currentWaypoint = 0;
+    private float footstepTimer = 0;
+    private float footstepTimerEnd = 4; 
 
-    
+
+
     /**
     * Runs when entering the state. setting the enemy attributes.  
     * @author: Yunseo Jeon
     * @since: 2025-05-29
     * @param AiAgent: A reference to the enemy. 
-    */ 
+    */
     public void Enter(AiAgent agent)
     {
         agent.navMeshAgent.speed = 1.658919f;
@@ -23,7 +26,7 @@ public class AirRoamState : AiState
     * @author: Yunseo Jeon
     * @since: 2025-05-29
     * @param AiAgent: A reference to the enemy. 
-    */ 
+    */
     public void Exit(AiAgent agent)
     {
         agent.navMeshAgent.stoppingDistance = 4;
@@ -46,24 +49,47 @@ public class AirRoamState : AiState
     * @author: Yunseo Jeon
     * @since: 2025-05-29
     * @param AiAgent: A reference to the enemy. 
-    */ 
+    */
     public void Update(AiAgent agent)
     {
         Vector3 playerDirection = agent.playerTransform.position - agent.transform.position;
-
-        if (playerDirection.magnitude > agent.config.maxSightDistance)
+        if (agent.footstepsTrigger)
         {
-            if (agent.navMeshAgent.remainingDistance <= 0.75f)
+            agent.navMeshAgent.SetDestination(agent.footstepPosition);
+            if (!agent.navMeshAgent.pathPending)
             {
-                currentWaypoint++;
-                if (currentWaypoint >= agent.waypoints.childCount)
+                if (agent.navMeshAgent.remainingDistance <= agent.navMeshAgent.stoppingDistance)
                 {
-                    currentWaypoint = 0;
+                    if (!agent.navMeshAgent.hasPath || agent.navMeshAgent.velocity.sqrMagnitude == 0f)
+                    {
+                        footstepTimer += Time.deltaTime;
+                        if (footstepTimer >= footstepTimerEnd)
+                        {
+                            agent.footstepsTrigger = false;
+                            footstepTimer = 0;
+                        }
+                    }
                 }
             }
         }
         else
         {
+            if (playerDirection.magnitude > agent.config.maxSightDistance)
+            {
+                if (agent.navMeshAgent.remainingDistance <= 0.75f)
+                {
+                    currentWaypoint++;
+                    if (currentWaypoint >= agent.waypoints.childCount)
+                    {
+                        currentWaypoint = 0;
+                    }
+                }
+            }
+            agent.navMeshAgent.SetDestination(agent.waypoints.GetChild(currentWaypoint).position);
+        }
+
+        if (!(playerDirection.magnitude > agent.config.maxSightDistance))
+        { 
             Vector3 agentDirection = agent.transform.forward;
 
             playerDirection.Normalize();
@@ -74,10 +100,9 @@ public class AirRoamState : AiState
                 agent.stateMachine.changeState(AiStateID.ChasePlayer);
                 return;
             }
-
         }
 
-        agent.navMeshAgent.SetDestination(agent.waypoints.GetChild(currentWaypoint).position);
     }
+
 
 }
