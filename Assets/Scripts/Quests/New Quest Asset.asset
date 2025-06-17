@@ -18,16 +18,18 @@ MonoBehaviour:
       body: Use WASD to move around and Mouse to look around
     - header: Escape the Jail Cell
       body: Find a way to escape the cell
-    - header: Escape the Jail Cell
+    - header: Find Items to Aid Escape
       body: Look for items that might help before escaping
-    - header: Escape the Jail Cell
+    - header: Find Items to Aid Escape
       body: To use an item equip it first by using buttons 1-7, then right click
         to use the item
-    - header: Escape the Jail Cell
+    - header: Find Items to Aid Escape
       body: 'Press B to toggle cursorlock and click on the item for more information.
         You can also change item slots by dragging it. '
-    - header: Escape the Jail Cell
+    - header: Find Items to Aid Escape
       body: 'To open the map use the phone item and press B to unlock the cursor
         then click the map icon. '
-    - header: Escape the Jail Cell
+    - header: Escape the Prison Room
+      body: Find a way to escape the prison room!
+    - header: Find a Disguise
       body: Find a way to escape the prison room!
