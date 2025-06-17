@@ -13,7 +13,7 @@ using Unity.VisualScripting;
 
 #if UNITY_EDITOR
 using UnityEditor;
-    using System.Net;
+using System.Net;
 #endif
 
 public class FirstPersonController : MonoBehaviour

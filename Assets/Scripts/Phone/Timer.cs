@@ -2,11 +2,22 @@ using System;
 using TMPro;
 using UnityEngine;
 
+/** 
+* Timer for the phone. 
+* @author: Oliver Thompson
+* @since: 2025-05-27
+*/ 
 public class Timer : MonoBehaviour
 {
-    TextMeshProUGUI text;
-    [SerializeField] bool formatOn = false; 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    TextMeshProUGUI text; // Reference to the textMesh that displays the time.
+    [SerializeField] bool formatOn = false; // To change the format of the time.
+
+
+    /** 
+    * On startup retrieve the TextMesh from the gameobject. 
+    * @author: Oliver Thompson
+    * @since: 2025-05-27
+    */ 
     void Start()
     {
         text = GetComponent<TextMeshProUGUI>();
@@ -30,9 +41,9 @@ public class Timer : MonoBehaviour
         }
         else
         {
-            timeString = DateTime.Now.ToString(); 
+            timeString = DateTime.Now.ToString();
         }
 
-        text.text = timeString; 
+        text.text = timeString;
     }
 }

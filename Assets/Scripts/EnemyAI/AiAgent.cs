@@ -15,9 +15,9 @@ public class AiAgent : MonoBehaviour
     public AiAgentConfig config; // Reference to the config class. 
     public Transform playerTransform; // Reference to the players position. 
     public Transform waypoints; // The waypoints the enemy traverses in the roam state. 
-    public Transform footstepsHolder;
-    public bool footstepsTrigger;
-    public Vector3 footstepPosition; 
+    public Transform footstepsHolder; // The folder where all the footstep hitboxes are stored.  
+    public bool footstepsTrigger; // True when footsteps are detected. 
+    public Vector3 footstepPosition; // The center of each footstep hitbox. 
 
 
     /** 
@@ -54,10 +54,12 @@ public class AiAgent : MonoBehaviour
         stateMachine.update();
     }
 
+    
+    // Called when the footstep collider hits an object with the enemy tag. 
     public void footstepsDetected()
     {
-            footstepPosition = playerTransform.position;
-            footstepsTrigger = true;
+        footstepPosition = playerTransform.position;
+        footstepsTrigger = true;
     }
 
 }

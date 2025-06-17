@@ -3,40 +3,61 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/** 
+* Class containing the main behaviors for the quest system. 
+*  @author: Yunseo Jeon
+* @since: 2025-06-10
+*/ 
 public class QuestController : MonoBehaviour
 {
 
-    [SerializeField] private GameObject player;
-    [SerializeField] private TextMeshProUGUI header;
-    [SerializeField] private TextMeshProUGUI body;
-    [SerializeField] private QuestAsset questAsset;
-    [SerializeField] private InventoryObject inventoryObject;
-    [SerializeField] private GameObject mapCanvas; 
-    [SerializeField] private GameObject inspectCanvas; 
-    
-    private Rigidbody rb;
-    private int questCounter = 0;
-    private Animator animator;
-    private bool isQuestHidden = false;
+    [SerializeField] private GameObject player; // Reference to the player
+    [SerializeField] private TextMeshProUGUI header; // Reference the to quest Header
+    [SerializeField] private TextMeshProUGUI body; // Reference to the quest body
+    [SerializeField] private QuestAsset questAsset; // Reference to the quest scriptable object. 
+    [SerializeField] private InventoryObject inventoryObject; // Reference to the inventory scriptable object
+    [SerializeField] private GameObject mapCanvas; // Reference to the map (for a quest)
+    [SerializeField] private GameObject inspectCanvas; // Reference to the inspect menu (for a quest)
 
+    private Rigidbody rb; // Reference to the player rigidbody. 
+    private int questCounter = 0; // keeping track of what quest we are on
+    private Animator animator; // Reference to the quest ui animator
+    private bool isQuestHidden = false; // Toggle quest ui 
+
+    /** 
+    * Initalize all the variables if needed on startup
+    * @author: Yunseo Jeon
+    * @since: 2025-06-10
+    */ 
     void Start()
     {
         rb = player.GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        isQuestHidden = false; 
+        isQuestHidden = false;
     }
 
-
+    /** 
+    * Repeatedly update the quest ui
+    * @author: Yunseo Jeon
+    * @since: 2025-06-10
+    */
     void Update()
-    {
+    {   
+        // Check if quest is done or not
         checkQuest();
+
+        // Togle quest ui
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             toggleQuestUI();
         }
     }
 
-
+    /** 
+    * Check what quest we are on and check if its completed or not based on the quest counter. The conditions for each quest goes in here
+    * @author: Yunseo Jeon
+    * @since: 2025-06-10
+    */
     private void checkQuest()
     {
         switch (questCounter)
@@ -89,7 +110,7 @@ public class QuestController : MonoBehaviour
                 break;
             case 6: // Escape Prison Room
 
-                break; 
+                break;
 
 
 
@@ -97,24 +118,36 @@ public class QuestController : MonoBehaviour
         }
     }
 
+    /** 
+    * Update the quest UI textboxes with the information of the current quest. 
+    * @author: Yunseo Jeon
+    * @since: 2025-06-10
+    */
     public void updateText()
-    {   
+    {
         header.text = questAsset.quests.questList[questCounter].header;
         body.text = questAsset.quests.questList[questCounter].body;
     }
 
+    
+    /** 
+    * Switch from one quest to another, Plays the animation and updates the text. 
+    * @author: Yunseo Jeon
+    * @since: 2025-06-10
+    * @param i: The current quest you just finished.
+    */
     public void switchQuestEvent(int i)
     {
         i++;
         questCounter = i;
 
         if (questCounter >= questAsset.quests.questList.Count)
-        { 
+        {
             if (!isQuestHidden)
             {
                 animator.Play("QuestClose", 0, 0.0f);
             }
-            return; 
+            return;
         }
 
         if (!isQuestHidden)
@@ -127,6 +160,12 @@ public class QuestController : MonoBehaviour
         }
     }
 
+    
+    /** 
+    * Toggle quest ui by playing the animation 
+    * @author: Yunseo Jeon
+    * @since: 2025-06-10
+    */
     private void toggleQuestUI()
     {
         if (isQuestHidden)
@@ -137,7 +176,7 @@ public class QuestController : MonoBehaviour
         {
             animator.Play("QuestClose", 0, 0.0f);
         }
-        isQuestHidden = !isQuestHidden; 
+        isQuestHidden = !isQuestHidden;
     }
 
 

@@ -51,15 +51,20 @@ public class AirRoamState : AiState
     * @param AiAgent: A reference to the enemy. 
     */
     public void Update(AiAgent agent)
-    {
+    {   
+        // Get player position relative to the enemy. 
         Vector3 playerDirection = agent.playerTransform.position - agent.transform.position;
+        
+        // If player is within the sight distance of the enemy. 
         if (!(playerDirection.magnitude > agent.config.maxSightDistance))
-        { 
-            Vector3 agentDirection = agent.transform.forward;
+        {
+            Vector3 agentDirection = agent.transform.forward; // Get the enemy's front direction. 
 
-            playerDirection.Normalize();
+            playerDirection.Normalize(); 
 
-            float dotProduct = Vector3.Dot(playerDirection, agentDirection);
+            float dotProduct = Vector3.Dot(playerDirection, agentDirection); // Get the dot product to check if the player is in front of the enemy. 
+
+            // If the player is in front of the enemy change the enemy state. 
             if (dotProduct > 0.0f)
             {
                 agent.stateMachine.changeState(AiStateID.ChasePlayer);
@@ -67,31 +72,37 @@ public class AirRoamState : AiState
             }
         }
 
+        // If agent is within the player footstep hitbox
         if (agent.footstepsTrigger)
         {
-            agent.navMeshAgent.SetDestination(agent.footstepPosition);
+            agent.navMeshAgent.SetDestination(agent.footstepPosition); // Set the enemy's destination to the center of that footstep hitbox
+
+            // Check if the enemy has reached the end of it's path
             if (!agent.navMeshAgent.pathPending)
             {
                 if (agent.navMeshAgent.remainingDistance <= agent.navMeshAgent.stoppingDistance)
                 {
                     if (!agent.navMeshAgent.hasPath || agent.navMeshAgent.velocity.sqrMagnitude == 0f)
-                    {
+                    {   
+                        // If the enemy has reached the end wait until the timer runs out before returning back to its original state. 
                         footstepTimer += Time.deltaTime;
                         if (footstepTimer >= footstepTimerEnd)
                         {
-                            agent.footstepsTrigger = false;
+                            // reset
+                            agent.footstepsTrigger = false; 
                             footstepTimer = 0;
                         }
                     }
                 }
             }
         }
-        else
+        else // If footsteps haven't been detected and enemy can't see player
         {
             if (playerDirection.magnitude > agent.config.maxSightDistance)
             {
                 if (agent.navMeshAgent.remainingDistance <= 0.75f)
-                {
+                {   
+                    // Follow waypoints
                     currentWaypoint++;
                     if (currentWaypoint >= agent.waypoints.childCount)
                     {
@@ -99,7 +110,7 @@ public class AirRoamState : AiState
                     }
                 }
             }
-            agent.navMeshAgent.SetDestination(agent.waypoints.GetChild(currentWaypoint).position);
+            agent.navMeshAgent.SetDestination(agent.waypoints.GetChild(currentWaypoint).position); // Set position to the next waypoint
         }
 
 

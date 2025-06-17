@@ -2,16 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/** 
+* Contains the behavior for player camera movement.
+* @author: Yunseo Jeon
+* @since: 2025-05-25
+*/
 public class PlayerLook : MonoBehaviour
 {
 
-    [SerializeField] private Camera cam;
+    [SerializeField] private Camera cam; // Reference the to player camera
+
+    // Cam sensitivity
     [SerializeField] private float xSens = 10;
     [SerializeField] private float ySens = 10;
-
+    
     private float xRotation = 0f;
     private bool locked = true;
 
+    
+    /** 
+    * Lock the cursor to the game screen on startup.
+    * @author: Yunseo Jeon
+    * @since: 2025-05-25
+    */
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -19,6 +33,12 @@ public class PlayerLook : MonoBehaviour
 
     }
 
+    
+    /** 
+    * Toggle the cursor lock
+    * @author: Yunseo Jeon
+    * @since: 2025-05-25
+    */
     public void ToggleLock()
     {
         if (locked)
@@ -33,6 +53,13 @@ public class PlayerLook : MonoBehaviour
         }
     }
 
+    
+    /** 
+    * Controls the camera movement based on mouse input
+    * @author: Yunseo Jeon
+    * @since: 2025-05-25
+    * @param input: The 2d vector derived from mouse movement.
+    */
     public void ProcessLook(Vector2 input)
     {
         float mouseX = input.x;
@@ -46,9 +73,16 @@ public class PlayerLook : MonoBehaviour
 
     }
 
+    
+    /** 
+    * Get the player camera
+    * @author: Yunseo Jeon
+    * @since: 2025-05-25
+    * @return: Player Camera
+    */
     public Camera GetCamera()
     {
-        return cam; 
+        return cam;
     }
 
 }

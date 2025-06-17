@@ -1,13 +1,23 @@
 using UnityEngine;
 
+/** 
+* Contains animations for all interactable items.
+* @author: Oliver Thompson
+* @since: 2025-05-30
+*/
 public class PlayerInteractionEvents : MonoBehaviour
 {
 
-    private bool isPrisonOpen = false;
-    private bool isLeverUp = true;
-    private bool isBossDoor = false;
+    private bool isPrisonOpen = false; // Toggle Prison Door
+    private bool isLeverUp = true; // Toggle Prison Lever
+    private bool isBossDoor = false; // Toggle Boss room Door
 
-
+    /** 
+    * Toggle prison door
+    * @author: Oliver Thompson
+    * @since: 2025-05-30
+    * @param: Reference to the prison door animator to play the appropriate animation
+    */
     public void openPrisonDoor(Animator animator)
     {
         isPrisonOpen = !isPrisonOpen;
@@ -22,6 +32,12 @@ public class PlayerInteractionEvents : MonoBehaviour
         }
     }
 
+    /** 
+    * Toggle Prison lever
+    * @author: Oliver Thompson
+    * @since: 2025-05-30
+    * @param: Reference to the prison lever animator to play the appropriate animation
+    */
     public void flipLever(Animator animator)
     {
         isLeverUp = !isLeverUp;
@@ -36,6 +52,12 @@ public class PlayerInteractionEvents : MonoBehaviour
         }
     }
 
+    /** 
+    * Toggle ExitDoot
+    * @author: Oliver Thompson
+    * @since: 2025-05-30
+    * @param: Reference to the exit door animator to play the appropriate animation
+    */
     public void toggleDoor(Animator animator)
     {
         if (isLeverUp)
@@ -48,6 +70,12 @@ public class PlayerInteractionEvents : MonoBehaviour
         }
     }
 
+    /** 
+    * Toggle boss door
+    * @author: Oliver Thompson
+    * @since: 2025-05-30
+    * @param: Reference to the boss door animator to play the appropriate animation
+    */
     public void toggleBossDoor(Animator animator)
     {
 
@@ -59,7 +87,7 @@ public class PlayerInteractionEvents : MonoBehaviour
         {
             animator.Play("OpenDoor", 0, 0.0f);
         }
-        isBossDoor = !isBossDoor; 
+        isBossDoor = !isBossDoor;
     }
 
 
