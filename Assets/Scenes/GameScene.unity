@@ -1940,7 +1940,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnInteract:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8811063820593628616}
+        m_TargetAssemblyTypeName: PlayerInteractionEvents, Assembly-CSharp
+        m_MethodName: diguise
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 58623866}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &58623869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1953,8 +1965,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6f36f4405ff0614bad3f18ccf4968bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promptMessage: 
-  useEvents: 0
+  promptMessage: '[E] Disguise'
+  useEvents: 1
 --- !u!136 &58623870
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -12350,7 +12362,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnInteract:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8811063820593628616}
+        m_TargetAssemblyTypeName: PlayerInteractionEvents, Assembly-CSharp
+        m_MethodName: diguise
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 322311220}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &322311223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12363,8 +12387,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6f36f4405ff0614bad3f18ccf4968bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promptMessage: 
-  useEvents: 0
+  promptMessage: '[E] Disguise'
+  useEvents: 1
 --- !u!136 &322311224
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -20673,7 +20697,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnInteract:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8811063820593628616}
+        m_TargetAssemblyTypeName: PlayerInteractionEvents, Assembly-CSharp
+        m_MethodName: diguise
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 550687451}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &550687454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20686,8 +20722,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6f36f4405ff0614bad3f18ccf4968bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promptMessage: 
-  useEvents: 0
+  promptMessage: '[E] Disguise'
+  useEvents: 1
 --- !u!136 &550687455
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -59139,13 +59175,13 @@ MonoBehaviour:
   OnInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8023212888363879656}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
+      - m_Target: {fileID: 8811063820593628616}
+        m_TargetAssemblyTypeName: PlayerInteractionEvents, Assembly-CSharp
+        m_MethodName: diguise
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgument: {fileID: 1497666762}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -60707,7 +60743,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnInteract:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8811063820593628616}
+        m_TargetAssemblyTypeName: PlayerInteractionEvents, Assembly-CSharp
+        m_MethodName: diguise
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1548877396}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1548877399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60720,8 +60768,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6f36f4405ff0614bad3f18ccf4968bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promptMessage: 
-  useEvents: 0
+  promptMessage: '[E] Disguise'
+  useEvents: 1
 --- !u!136 &1548877400
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -110582,6 +110630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 756a2d06ffd284b4d9d981f348c49cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mannequinPrefab: {fileID: 0}
 --- !u!1 &8817898887002422496
 GameObject:
   m_ObjectHideFlags: 0

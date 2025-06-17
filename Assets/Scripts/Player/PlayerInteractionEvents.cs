@@ -11,6 +11,7 @@ public class PlayerInteractionEvents : MonoBehaviour
     private bool isPrisonOpen = false; // Toggle Prison Door
     private bool isLeverUp = true; // Toggle Prison Lever
     private bool isBossDoor = false; // Toggle Boss room Door
+    [SerializeField] public GameObject mannequinPrefab; 
 
     /** 
     * Toggle prison door
@@ -88,6 +89,14 @@ public class PlayerInteractionEvents : MonoBehaviour
             animator.Play("OpenDoor", 0, 0.0f);
         }
         isBossDoor = !isBossDoor;
+    }
+
+    public void diguise(GameObject gameObject)
+    {   
+        Vector3 manPos = gameObject.transform.position;
+        var obj = Instantiate(mannequinPrefab, gameObject.transform.parent.transform);
+        obj.transform.position = manPos;
+        Destroy(gameObject); 
     }
 
 

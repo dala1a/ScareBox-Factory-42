@@ -23,7 +23,11 @@ public class Timer : MonoBehaviour
         text = GetComponent<TextMeshProUGUI>();
     }
 
-    // Update is called once per frame
+    /** 
+    * Display the date and time, Update it constantly 
+    * @author: Oliver Thompson
+    * @since: 2025-05-27
+    */ 
     void Update()
     {
         String timeString;

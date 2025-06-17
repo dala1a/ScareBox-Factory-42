@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /** 
-* Class containing all the behaviors for the phone item. 
+* Class containing all the animations for the phone item. 
 * @author: Oliver Thompson
 * @since: 2025-05-27
 */ 

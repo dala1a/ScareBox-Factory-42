@@ -40,7 +40,7 @@ public class AiChasePlayerState : AiState
     * @param AiAgent: A reference to the enemy. 
     */ 
     public void Update(AiAgent agent)
-    {
+    {   
         timer -= Time.deltaTime;
         float shortestDistance = 0;
 

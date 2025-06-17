@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /** 
@@ -18,6 +19,7 @@ public class QuestController : MonoBehaviour
     [SerializeField] private InventoryObject inventoryObject; // Reference to the inventory scriptable object
     [SerializeField] private GameObject mapCanvas; // Reference to the map (for a quest)
     [SerializeField] private GameObject inspectCanvas; // Reference to the inspect menu (for a quest)
+    [SerializeField] private Transform mannequinHolder; 
 
     private Rigidbody rb; // Reference to the player rigidbody. 
     private int questCounter = 0; // keeping track of what quest we are on
@@ -112,6 +114,15 @@ public class QuestController : MonoBehaviour
 
                 break;
 
+            case 7:
+                for (int i = 0; i < mannequinHolder.childCount; i++)
+                {
+                    if (mannequinHolder.GetChild(i).gameObject.layer != 3) 
+                    {
+                        switchQuestEvent(7);
+                    }
+                }
+                break; 
 
 
 
